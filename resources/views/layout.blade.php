@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>@yield("title", "Workopia")</title>
 </head>
-<body>
+<body class="bg-gray-100">
     
     <x-header />
 
