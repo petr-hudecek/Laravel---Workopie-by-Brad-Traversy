@@ -18,41 +18,17 @@
 
         <x-inputs.text-input id="tags" name="tags" label="Tags (Comma separated)" placeholder="Development, Coding, Java, Python" />
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700" for="job_type"
-                            >Job Type</label
-                        >
-                        <select
-                            id="job_type"
-                            name="job_type"
-                            class="w-full px-4 py-2 border rounded focus:outline-none @error('job_type') border-red-500 @enderror"
-                        >
-                            <option value="Full-Time" {{old('job_type') == 'Full-Time' ? 'Selected' : ''}}>Full-Time</option>
-                            <option value="Part-Time" {{old('job_type') == 'Part-Time' ? 'Selected' : ''}}>Part-Time</option>
-                            <option value="Contract" {{old('job_type') == 'Contract' ? 'Selected' : ''}}>Contract</option>
-                            <option value="Temporary" {{old('job_type') == 'Temporary' ? 'Selected' : ''}}>Temporary</option>
-                            <option value="Internship" {{old('job_type') == 'Internship' ? 'Selected' : ''}}>Internship</option>
-                            <option value="Volunteer" {{old('job_type') == 'Volunteer' ? 'Selected' : ''}}>Volunteer</option>
-                            <option value="On-Call" {{old('job_type') == 'On-Call' ? 'Selected' : ''}}>On-Call</option>
-                        </select>
-                        @error('job_type')
-                            <p class="text-red-500 text-sm mt-1">{{$message}}</p>
-                        @enderror
-                    </div>
+        <x-inputs.select-input id="job_type" name="job_type" label="Job Type"
+        value="{{old('job_type')}}" :options="['Full-Time' => 'Full-Time',
+        'Part-Time' => 'Part-Time',
+        'Contract' => 'Contract',
+        'Temporary' => 'Temporary',
+        'Internship' => 'Internship',
+        'Volunteer' => 'Volunteer',
+        'On-Call' => 'On-Call']" />
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700" for="remote"
-                            >Remote</label
-                        >
-                        <select
-                            id="remote"
-                            name="remote"
-                            class="w-full px-4 py-2 border rounded focus:outline-none"
-                        >
-                            <option value="false">No</option>
-                            <option value="true">Yes</option>
-                        </select>
-                    </div>
+                    <x-inputs.select-input id="remote" name="remote" label="Remote"
+        :options="[0 => 'No', 1 => 'Yes']" />
 
                     
                     <x-inputs.text-input id="address" name="address" label="Address" placeholder="123 Main St" />
@@ -82,20 +58,7 @@
 
                     <x-inputs.text-input id="contact_email" name="contact_email" label="Contact Dmail" placeholder="Email where you want to receive applications" />
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700" for="company_logo"
-                            >Company Logo</label
-                        >
-                        <input
-                            id="company_logo"
-                            type="file"
-                            name="company_logo"
-                            class="w-full px-4 py-2 border rounded focus:outline-none @error('company_logo') border-red-500 @enderror"
-                        />
-                        @error('company_logo')
-                            <p class="text-red-500 text-sm mt-1">{{$message}}</p>
-                        @enderror
-                    </div>
+                    <x-inputs.file-input id="company_logo" name="company_logo" label="Company Logo"/>
 
                     <button
                         type="submit"
