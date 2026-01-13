@@ -9,18 +9,12 @@ use Illuminate\Http\RedirectResponse;
 
 class JobController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View
     {
         $jobs = Job::all();
         return view("Jobs.index")->with("jobs", $jobs);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view("Jobs.create");
@@ -30,16 +24,31 @@ class JobController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            "title" => "required|string|max:255",
-            "description" => "required|string|max:255"
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'salary' => 'required|integer',
+            'tags' => 'nullable|string',
+            'job_type' => 'required|string',
+            'remote' => 'required|boolean',
+            'requirements' => 'nullable|string',
+            'benefits' => 'nullable|string',
+            'address' => 'nullable|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'zipcode' => 'nullable|string',
+            'contact_email' => 'required|string',
+            'contact_phone' => 'nullable|string',
+            'company_name' => 'required|string',
+            'company_description' => 'nullable|string',
+            'company_logo' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
+            'company_website' => 'nullable|url',
         ]);
 
-        Job::create([
-            "title" => $validatedData["title"],
-            "description" => $validatedData["description"],
-        ]);
+        $validatedData['user_id'] = 1;
 
-        return redirect()->route("jobs.index");
+        Job::create($validatedData);
+
+        return redirect()->route("jobs.index")->with("success", "Job Listing created succesfully!");
     }
 
 
@@ -48,25 +57,16 @@ class JobController extends Controller
         return view("jobs.show")->with("job", $job);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         return "Edit";
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         return "Update";
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         return "Destroy";

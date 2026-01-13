@@ -19,6 +19,11 @@
     @endif
 
     <main class="container mx-auto mt-4">
+
+        @if (session('error'))
+            <x-alert type="error" message="{{session('error')}}" />
+        @endif
+
         @yield("content")
     </main>
 
