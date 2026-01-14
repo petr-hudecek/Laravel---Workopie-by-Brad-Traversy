@@ -5,7 +5,7 @@
 <div class="bg-white mx-auto p-8 rounded-lg shadow-md w-full md:max-w-3xl">
     <h1 class="text-4xl text-center font-bold mb-4">Create Job Listing</h1>
         
-    <form method="POST" action="/jobs" enctype="multipart/form-data">
+    <form method="POST" action="{{route('jobs.store')}}" enctype="multipart/form-data">
         @csrf
 
         <x-inputs.text-input id="title" name="title" label="Job Title" placeholder="Software Engineer" />

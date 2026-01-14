@@ -16,5 +16,5 @@
         if (message) {
             message.remove();
         }
-    }, 3000);
+    }, 5000);
 </script>
