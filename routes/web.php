@@ -12,14 +12,14 @@ Route::get('/', [HomeController::class, "index"])->name("home");
 
 Route::resource("jobs", JobController::class)->middleware("auth")->only(["create", "store", "edit", "update", "destroy"]);
 Route::resource("jobs", JobController::class)->except(["create", "store", "edit", "update", "destroy"]);
-//Route::resource("jobs", JobController::class)->only(["index", "show"]);
 
+// Aby přihlášený nemohl znovu najet na login ani register
+Route::middleware("guest")->group(function() {
+    Route::get('/register', [RegisterController::class, "register"])->name("register");
+    Route::post('/register', [RegisterController::class, "store"])->name("register.store");
 
-
-Route::get('/register', [RegisterController::class, "register"])->name("register");
-Route::post('/register', [RegisterController::class, "store"])->name("register.store");
-
-Route::get('/login', [LoginController::class, "login"])->name("login");
-Route::post('/login', [LoginController::class, "authenticate"])->name("login.authenticate");
+    Route::get('/login', [LoginController::class, "login"])->name("login")->middleware("guest");
+    Route::post('/login', [LoginController::class, "authenticate"])->name("login.authenticate");
+});
 
 Route::post('/logout', [LoginController::class, "logout"])->name("logout");
